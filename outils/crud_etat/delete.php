@@ -1,18 +1,18 @@
 <?php
 // Process delete operation after confirmation
-if(isset($_POST["id"]) && !empty($_POST["id"])){
+if(isset($_POST["ET_ID"]) && !empty($_POST["ET_ID"])){
     // Include config file
     require_once "config.php";
     
     // Prepare a delete statement
-    $sql = "DELETE FROM employees WHERE id = ?";
+    $sql = "DELETE FROM ETAT WHERE ET_ID = ?";
     
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_id = trim($_POST["id"]);
+        $param_id = trim($_POST["ET_ID"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -31,7 +31,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     mysqli_close($link);
 } else{
     // Check existence of id parameter
-    if(empty(trim($_GET["id"]))){
+    if(empty(trim($_GET["ET_ID"]))){
         // URL doesn't contain id parameter. Redirect to error page
         header("location: error.php");
         exit();
